@@ -9,7 +9,7 @@ namespace FItnessTrack.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Service> Services { get; set; }
+        public DbSet<Service>Services { get; set; }
         public DbSet<PersonalTraining>Trainings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
