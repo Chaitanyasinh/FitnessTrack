@@ -9,8 +9,8 @@ namespace FItnessTrack.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Service> Service { get; set; }
-        public DbSet<PersonalTraining> Training { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<PersonalTraining>Trainings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -21,7 +21,12 @@ namespace FItnessTrack.Data
                     .HasOne(p => p.Service)
                     .WithMany(c => c.Training)
                     .HasForeignKey(p => p.TrainingId)
-                    .HasConstraintName("FK_Training_Service");
+                    .HasConstraintName("FK_Training_ServiceId");
+
+            builder.Entity<PersonalTraining>()
+                .HasKey(c => c.TrainingId);
+            builder.Entity<Service>()
+               .HasKey(c => c.ServiceId);
         }
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
