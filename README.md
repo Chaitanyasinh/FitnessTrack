@@ -1,0 +1,3 @@
+# FitnessTrack
+Purpose of a A Web application for Virtual Gymnasium
+This web application is basically a gymnasium application which is designed for especially the virtual aspects. Such as, virtual gymnasium as well the virtual gym store of an any existing gym in the locality. Because, in this pandemic it is becoming harder for the gym owners to survive financially. So, they can provide their facilities online and it is also safer for people as well as trainers. People can buy such stuff from their favourite gymnasium which is availble online now. It is very accessible and easy to use for everyone.
