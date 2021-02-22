@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FItnessTrack.Models
 {
-    public class Service
+    public class Service 
     {
 
         public int ServiceId { get; set; } //Primary Key
