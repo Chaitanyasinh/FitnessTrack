@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'gymfitnesstrack'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_9bef6e11ff7647009a59d5a495e3825d }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0558f333b92b48c8926b29075998d788 }}
         package: ${{env.DOTNET_ROOT}}/myapp 
