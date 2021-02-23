@@ -8,7 +8,7 @@ namespace FItnessTrack.Models
 {
     public class Service 
     {
-        [Key]
+
         public int ServiceId { get; set; } //Primary Key
         [Required]
         public string ServiceName { get; set; }

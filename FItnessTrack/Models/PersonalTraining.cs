@@ -12,7 +12,7 @@ namespace FItnessTrack.Models
         public int TrainingId { get; set; } // PK
         public String Desciption { get; set; }
         public Double Charge { get; set; }
-        public Service Service { get; set; }
         public int ServiceId { get; set; }
+        public Service Service { get; set; }
     }
 }

@@ -22,11 +22,6 @@ namespace FItnessTrack.Data
                     .WithMany(c => c.Training)
                     .HasForeignKey(p => p.TrainingId)
                     .HasConstraintName("FK_Training_ServiceId");
-
-            builder.Entity<PersonalTraining>()
-                .HasKey(c => c.TrainingId);
-            builder.Entity<Service>()
-               .HasKey(c => c.ServiceId);
         }
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
