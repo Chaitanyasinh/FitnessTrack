@@ -86,7 +86,7 @@ namespace FItnessTrack.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,ServiceName,FirstName,LastName")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,ServiceName,FirstNameme,LastNameme")] Service service)
         {
             if (id != service.ServiceId)
             {

@@ -46,13 +46,13 @@ namespace FItnessTrack.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstNameme")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastNameme")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ServiceId");
