@@ -14,7 +14,7 @@ namespace FItnessTrack.Data.Migrations
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<string>(
-                name: "FirstNameme",
+                name: "FirstName",
                 table: "Services",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -33,7 +33,7 @@ namespace FItnessTrack.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "FirstNameme",
+                name: "FirstName",
                 table: "Services",
                 type: "nvarchar(max)",
                 nullable: true,

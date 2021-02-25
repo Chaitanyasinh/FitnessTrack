@@ -13,8 +13,8 @@ namespace FItnessTrack.Data.Migrations
                     ServiceId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceName = table.Column<string>(nullable: false),
-                    FirstNameme = table.Column<string>(nullable: true),
-                    LastNameme = table.Column<string>(nullable: true)
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

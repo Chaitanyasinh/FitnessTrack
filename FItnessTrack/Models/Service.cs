@@ -11,8 +11,8 @@ namespace FItnessTrack.Models
         [Key]
         public int ServiceId { get; set; } //Primary Key
         [Required]
-        public string FirstNameme { get; set; }
-        public string LastNameme{ get; set; }
+        public string FirstName { get; set; }
+        public string LastName{ get; set; }
         public string ServiceName { get; set; }
         public List<PersonalTraining> Training { get; set; }
 
