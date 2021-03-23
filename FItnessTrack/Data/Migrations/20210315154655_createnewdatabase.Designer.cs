@@ -10,16 +10,57 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FItnessTrack.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210222022240_CreateInitialTable")]
-    partial class CreateInitialTable
+    [Migration("20210315154655_createnewdatabase")]
+    partial class createnewdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("FItnessTrack.Models.PersonalTraining", b =>
+                {
+                    b.Property<int>("TrainingId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Charge")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Desciption")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TrainingId");
+
+                    b.ToTable("Trainings");
+                });
+
+            modelBuilder.Entity("FItnessTrack.Models.Service", b =>
+                {
+                    b.Property<int>("ServiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ServiceId");
+
+                    b.ToTable("Services");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -219,6 +260,16 @@ namespace FItnessTrack.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FItnessTrack.Models.PersonalTraining", b =>
+                {
+                    b.HasOne("FItnessTrack.Models.Service", "Service")
+                        .WithMany("Training")
+                        .HasForeignKey("TrainingId")
+                        .HasConstraintName("FK_Training_ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

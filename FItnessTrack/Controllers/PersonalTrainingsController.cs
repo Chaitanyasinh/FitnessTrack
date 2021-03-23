@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FItnessTrack.Data;
 using FItnessTrack.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FItnessTrack.Controllers
 {
+    [Authorize]
     public class PersonalTrainingsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,10 +25,12 @@ namespace FItnessTrack.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Trainings.Include(p => p.Service);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.OrderBy(p => p.ServiceId).ToListAsync());
         }
 
         // GET: PersonalTrainings/Details/5
+
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,7 +52,7 @@ namespace FItnessTrack.Controllers
         // GET: PersonalTrainings/Create
         public IActionResult Create()
         {
-            ViewData["TrainingId"] = new SelectList(_context.Services, "ServiceId", "ServiceName");
+            ViewData["TrainingId"] = new SelectList(_context.Services.OrderBy(c => c.ServiceName ), "ServiceId", "ServiceName");
             return View();
         }
 

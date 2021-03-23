@@ -8,16 +8,17 @@
 
     @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">*@
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="~/css/StyleSheet.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light badge-pill border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-md badge-pill .bg-info navbar-light bg-secondary">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FitnessTrackGym</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/dumbbell.png" alt="FitnessTrack Gym" sizes="10px"/>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

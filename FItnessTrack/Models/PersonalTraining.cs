@@ -11,8 +11,17 @@ namespace FItnessTrack.Models
         [Key]
         public int TrainingId { get; set; } // PK
         public String Desciption { get; set; }
+
+        [DisplayFormat(DataFormatString ="{0:c}")]
+
+        [Range(0.01,999999)]
         public double Charge { get; set; }
+
+        [Display(Name = "Time (Months)")]
+
         public int ServiceId { get; set; }
+        [Required]
+
         public Service Service { get; set; }
     }
 }

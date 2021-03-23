@@ -2,7 +2,7 @@
 
 namespace FItnessTrack.Data.Migrations
 {
-    public partial class CreateInitialTable : Migration
+    public partial class createnewdatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
