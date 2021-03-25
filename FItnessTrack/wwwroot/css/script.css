@@ -1,0 +1,13 @@
+﻿nav.navbar.navbar-expand-md {
+    min-width: max-content;
+    margin-left: -35px;
+}
+
+
+footer.border-top.footer {
+    bottom: 0;
+    width: 60%;
+    line-height: 50px; 
+    position: absolute;
+    white-space:unset;
+}

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FItnessTrack.Models.Service>
+
+@{
+    ViewData["Title"] = "Have a Look for your body's fitness";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Choose Our Service!</h1>
+<section>
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-lg-4 mb-3">
+                <div class="card mb-3 text-center h-100">
+                    <div class="card-header-tabs">
+                        <a asp-controller="Shop" asp-action="Index">@item.ServiceName</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

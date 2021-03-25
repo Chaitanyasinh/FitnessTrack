@@ -9,7 +9,7 @@
     @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">*@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="~/css/script.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
 </head>
 <body>
@@ -29,16 +29,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Index">Choose Service</a>
+                        </li>
                         <li class="nav-item" style="color:white">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PersonalTrainings" asp-action="Index">Personal Training</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
-                        </li>
-                    </ul>
+                        @if (User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item" style="color:white">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonalTrainings" asp-action="Details">Details</a>
+                            </li>
+                        }
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="PersonalTrainings" asp-action="Index">Personal Training</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+                                </li>
+                            }
+                        </ul>
                 </div>
             </div>
         </nav>
@@ -46,6 +58,15 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            
+            <div class="trinity-rings-spinner" style="position:absolute; left:600px; bottom:200px">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+
+
+            <link rel="stylesheet" href="~/css/site.css" />
         </main>
     </div>
 

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FItnessTrack.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class PersonalTrainingsController : Controller
     {
         private readonly ApplicationDbContext _context;
