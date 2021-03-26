@@ -41,13 +41,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Service.ServiceName)
                 </td>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Desciption)
                 </td>
-                <td class="text-left">
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.TrainingId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TrainingId">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.TrainingId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.TrainingId">Delete</a>
                 </td>
             </tr>
