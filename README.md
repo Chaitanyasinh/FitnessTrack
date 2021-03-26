@@ -8,3 +8,7 @@ I have got the css and configured a little on my own from: https://cdn.jsdelivr.
 A link to my website: https://gymfitnesstrack.azurewebsites.net/
 
 Giyhub Repo-FItnessTrack link: https://github.com/Chaitanyasinh/FitnessTrackGym
+
+Css animation retrived from: https://epic-spinners.epicmax.co/?ref=producthunt
+
+
