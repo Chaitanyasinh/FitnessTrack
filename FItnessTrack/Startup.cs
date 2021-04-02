@@ -33,6 +33,14 @@ namespace FItnessTrack
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            // enable google authentication using the ApI keys we created in Google Dev Console 
+            services.AddAuthentication()
+                .AddGoogle(option =>
+                {
+                    option.ClientId = Configuration.GetSection("Authentication:Google")["ClientId"];
+                    option.ClientSecret = Configuration.GetSection("Authentication:Google")["ClientSecret"];
+                });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
