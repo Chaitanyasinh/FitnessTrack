@@ -58,18 +58,15 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-            
-            <div class="trinity-rings-spinner" style="position:absolute; left:600px; bottom:200px">
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-            </div>
-
-
-            <link rel="stylesheet" href="~/css/site.css" />
         </main>
     </div>
+    <style>
+        nav.navbar.navbar-expand-md 
+        {
+            margin-left: -3px;
+        }
 
+    </style>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; Chaitanyasinh Jetavat - 200447336 - 2021 - FItnessTrack - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

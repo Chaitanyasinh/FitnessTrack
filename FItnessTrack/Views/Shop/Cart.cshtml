@@ -1,0 +1,67 @@
+﻿@model IEnumerable<FItnessTrack.Models.Cart>
+
+@{
+    ViewData["Title"] = "Your Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double total = 0;
+}
+
+<h1>Your Cart</h1>
+
+<table class="table table-striped" style="color:whitesmoke">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Service)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charge)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            total += (item.Quantity * item.Charge);
+            <tr>
+                <td>
+                    <a asp-controller="PersonalTrainings" asp-action="Details" asp-route-id="@item.ServiceId">@item.Service.ServiceName</a>
+
+                    @*@Html.DisplayFor(modelItem => item.Service.ServiceName)*@
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.Charge)
+                </td>
+                <td>
+                    <a asp-action="RemoveFromCart" asp-route-id="@item.CartId">Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-md-center"style ="white-space:initial">
+                @String.Format("Total: {0:c} ", total)
+            </td>
+            <td>
+                <a class="btn btn-primary align-content-lg-around " asp-action="Index">Keep Shop</a>
+                <a class="btn btn-primary align-content-lg-end" asp-action="Checkout">Check-Out</a>
+            </td>
+            <style>
+                .align-content-lg-end {
+                    margin-left:-210px;
+                }
+                .align-content-lg-around {
+                    margin-left: -125px;
+                }
+                .text-md-center{
+                    color:aquamarine;
+                }
+            </style>
+        </tr>
+    </tbody>
+</table>

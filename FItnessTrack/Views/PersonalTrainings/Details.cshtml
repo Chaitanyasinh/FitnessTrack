@@ -1,14 +1,13 @@
 ﻿@model FItnessTrack.Models.PersonalTraining
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "PersonalTraining Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>PersonalTraining Details</h1>
 
 <div>
-    <h4>PersonalTraining</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -37,7 +36,20 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TrainingId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<form method="post" action="/Shop/AddToCart">
+    <!--Hidden Field forhte selected produict id-->
+    <input type="hidden" id="ServiceId" name="ServiceId" value="@Model.ServiceId" />
+    <div class="form-group">
+        <label style="color:#41ADFF" control-label" for="Quantity">Quantity: </label>
+        <input name="Quantity" id="Quantity" required min="1" max="99999" type="number" class="input-small" />
+    </div>
+    <style>
+        .input-small {
+            width: 60px;
+            height: 30px;
+        }
+    </style>
+    <button class="btn btn-primary">Add To Cart</button>
+</form>
+<a href="javascript:history.go(-1);"> << Back</a>

@@ -4,14 +4,16 @@ using FItnessTrack.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FItnessTrack.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210404150119_addedprice")]
+    partial class addedprice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,79 +48,6 @@ namespace FItnessTrack.Data.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("FItnessTrack.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Province")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Total")
-                        .HasColumnType("float");
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("FItnessTrack.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Charge")
-                        .HasColumnType("float");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("FItnessTrack.Models.PersonalTraining", b =>
@@ -367,27 +296,10 @@ namespace FItnessTrack.Data.Migrations
 
             modelBuilder.Entity("FItnessTrack.Models.Cart", b =>
                 {
-                    b.HasOne("FItnessTrack.Models.Service", "Service")
+                    b.HasOne("FItnessTrack.Models.PersonalTraining", "PersonalTraining")
                         .WithMany("Carts")
                         .HasForeignKey("ServiceId")
                         .HasConstraintName("FK_Carts_TrainingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FItnessTrack.Models.OrderDetail", b =>
-                {
-                    b.HasOne("FItnessTrack.Models.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .HasConstraintName("FK_OrderDetails_OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FItnessTrack.Models.Service", "Service")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ServiceId")
-                        .HasConstraintName("FK_OrderDetails_ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

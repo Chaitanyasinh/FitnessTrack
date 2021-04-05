@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FItnessTrack.Models.PersonalTraining>
+
+<h1>Feel Free to Browse our Sevices</h1>
+
+<h3 style="color:navajowhite">Selected service: @ViewBag.category</h3>
+
+
+<section>
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+        <div class="col-sm-6 col-lg-4 mb-3">
+            <div class="card mb-3 text-center h-100">
+                <div class="card-header-tabs">
+                    <h6> <a asp-controller="PersonalTrainings" asp-action="Details" asp-route-id="@item.ServiceId">Charge: @item.Charge</a> </h6>
+                    <p style="color:black">
+                        @String.Format(item.Desciption)
+                    </p>
+
+                    <form method="post" action="/Shop/AddToCart">
+                        <!--Hidden Field forhte selected produict id-->
+                        <input type="hidden" id="ServiceId" name="ServiceId" value="@item.ServiceId" />
+                        <div class="form-group">
+                            <label style="color:#41ADFF" control-label" for="Quantity">Quantity: </label>
+                            <input name="Quantity" id="Quantity" required min="1" max="99999" type="number" class="input-small" />
+                        </div>
+                        <style>
+                            .input-small {
+                                width: 60px;
+                                height: 30px;
+                                margin-left: 95px;
+                            }
+
+                            .btn-primary {
+                                margin-left: 10px;
+                            }
+                        </style>
+                        <button class="btn btn-primary">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>}
+            </div>
+</section>
