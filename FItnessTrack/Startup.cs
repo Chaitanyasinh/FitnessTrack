@@ -44,6 +44,8 @@ namespace FItnessTrack
             //Enable Session Support to store identities for the shopping cart
             services.AddSession();
 
+            //Add congif support for the ShopController - Needed for --Stripe!--
+            services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddControllersWithViews();
             services.AddRazorPages();

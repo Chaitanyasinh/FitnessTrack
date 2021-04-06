@@ -11,23 +11,30 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FItnessTrack.Controllers
 {
-    [Authorize(Roles = "Administrator")]
-    public class ServicesController : Controller
+    [Authorize]
+    public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ServicesController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Services
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Services.ToListAsync());
+            if (User.IsInRole("Administrator"))
+            {
+                return View(await _context.Orders.OrderByDescending(o => o.OrderId).ToListAsync());
+            }
+            else
+            {
+                return View(await _context.Orders.Where(o => o.CustomerId == User.Identity.Name).OrderByDescending(o => o.OrderDate).ToListAsync());
+            }
         }
 
-        // GET: Services/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +42,48 @@ namespace FItnessTrack.Controllers
                 return NotFound();
             }
 
-            var service = await _context.Services
-                .FirstOrDefaultAsync(m => m.ServiceId == id);
-            if (service == null)
+            var order = await _context.Orders.Include(o=>o.OrderDetails).ThenInclude(o => o.Service)
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+
+            // if current customer does not own this order
+            if (!User.IsInRole("Administrator"))
+            {
+                if (order.CustomerId != User.Identity.Name)
+                {
+                    return NotFound();
+                }
+            }
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(service);
+            return View(order);
         }
 
-        // GET: Services/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Services/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServiceId,ServiceName,FirstName,LastName,Charge")] Service service)
+        public async Task<IActionResult> Create([Bind("OrderId,OrderDate,CustomerId,FirstName,LastName,Address,City,Province,PostalCode,Phone,email,Total")] Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(service);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(service);
+            return View(order);
         }
 
-        // GET: Services/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +91,22 @@ namespace FItnessTrack.Controllers
                 return NotFound();
             }
 
-            var service = await _context.Services.FindAsync(id);
-            if (service == null)
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return View(service);
+            return View(order);
         }
 
-        // POST: Services/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,ServiceName,FirstName,LastName, Charge")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,OrderDate,CustomerId,FirstName,LastName,Address,City,Province,PostalCode,Phone,email,Total")] Order order)
         {
-            if (id != service.ServiceId)
+            if (id != order.OrderId)
             {
                 return NotFound();
             }
@@ -99,12 +115,12 @@ namespace FItnessTrack.Controllers
             {
                 try
                 {
-                    _context.Update(service);
+                    _context.Update(order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServiceExists(service.ServiceId))
+                    if (!OrderExists(order.OrderId))
                     {
                         return NotFound();
                     }
@@ -115,10 +131,10 @@ namespace FItnessTrack.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(service);
+            return View(order);
         }
 
-        // GET: Services/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +142,30 @@ namespace FItnessTrack.Controllers
                 return NotFound();
             }
 
-            var service = await _context.Services
-                .FirstOrDefaultAsync(m => m.ServiceId == id);
-            if (service == null)
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(service);
+            return View(order);
         }
 
-        // POST: Services/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var service = await _context.Services.FindAsync(id);
-            _context.Services.Remove(service);
+            var order = await _context.Orders.FindAsync(id);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ServiceExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.Services.Any(e => e.ServiceId == id);
+            return _context.Orders.Any(e => e.OrderId == id);
         }
     }
 }

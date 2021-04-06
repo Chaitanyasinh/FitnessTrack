@@ -1,15 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - FItnessTrack</title>
 
     @*<link rel="stylesheet" .text-dark="" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
-
     @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">*@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     @*<link rel="stylesheet" href="~/css/script.css">*@
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Commissioner&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
 </head>
 <body>
@@ -17,7 +20,7 @@
         <nav class="navbar navbar-expand-md badge-pill .bg-info navbar-light bg-secondary">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/img/dumbbell.png" alt="FitnessTrack Gym" sizes="10px"/>
+                    <img src="~/img/dumbbell.png" alt="FitnessTrack Gym" sizes="10px" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -35,22 +38,27 @@
                         <li class="nav-item" style="color:white">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @*@if (User.IsInRole("Customer"))
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Shop" asp-action="Cart">
+                                <span class="material-icons align-top">
+                                    shopping_cart
+                                </span>
+                                @if (Context.Session.GetInt32("ItemCount") != 0)
+                                {
+                                    <span class="badge badge-secondary">@Context.Session.GetInt32("ItemCount")</span>}
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole("Administrator"))
                         {
-                            <li class="nav-item" style="color:white">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonalTrainings" asp-action="Details">Details</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonalTrainings" asp-action="Index">Personal Training</a>
                             </li>
-                        }*@
-                            @if (User.IsInRole("Administrator"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="PersonalTrainings" asp-action="Index">Personal Training</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
-                                </li>
-                            }
-                        </ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -61,11 +69,9 @@
         </main>
     </div>
     <style>
-        nav.navbar.navbar-expand-md 
-        {
+        nav.navbar.navbar-expand-md {
             margin-left: -3px;
         }
-
     </style>
     <footer class="border-top footer text-muted">
         <div class="container">
