@@ -156,6 +156,7 @@ namespace FItnessTrack.Controllers
             //redirect to Payment Page
             return RedirectToAction("Payment");
         }
+
         [Authorize]
         public IActionResult Payment()
         {

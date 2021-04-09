@@ -13,7 +13,6 @@ namespace FItnessTrack.Models
         public String Desciption { get; set; }
 
         [DisplayFormat(DataFormatString ="{0:c}")]
-
         [Range(0.01,999999)]
         public double Charge { get; set; }
 
