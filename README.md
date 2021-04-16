@@ -11,4 +11,5 @@ Giyhub Repo-FItnessTrack link: https://github.com/Chaitanyasinh/FitnessTrackGym
 
 Css animation retrived from: https://epic-spinners.epicmax.co/?ref=producthunt
 
+Implemented Swagger API: https://swagger.io/solutions/api-documentation/
 
