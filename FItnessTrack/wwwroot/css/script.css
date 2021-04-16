@@ -1,12 +1,7 @@
-﻿nav.navbar.navbar-expand-md {
-    margin-left: -3px;
+﻿.error{
+    background-color:cyan;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
-
-footer.border-top.footer {
-    bottom: 0;
-    width: 60%;
-    line-height: 50px; 
-    position: absolute;
+h2{
+    text-align:center;
 }
-
